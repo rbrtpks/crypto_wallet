@@ -6,24 +6,29 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Cadastrando moedas..."
-# Ponto de exclamação força a exibição do erro caso ocorra
-Coin.create!(
-    description: "Bitcoin",
-    acronym: "BTC",
-    url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-)
+spinner = TTY::Spinner.new("[:spinner] Cadastrando moedas...")
+  spinner.auto_spin
 
-Coin.create!(
-    description: "Ethereum",
-    acronym: "ETH",
-    url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
-)
+coins = [
+  {
+      description: "Bitcoin",
+      acronym: "BTC",
+      url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+  },
+  {
+      description: "Ethereum",
+      acronym: "ETH",
+      url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+  },
+  {
+      description: "Dash",
+      acronym: "DASH",
+      url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/131.png"
+  }
+]
 
-Coin.create!(
-    description: "Dash",
-    acronym: "DASH",
-    url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/131.png"
-)
+coins.each do |coin|
+  Coin.find_or_create_by!(coin)
+end
 
-puts "Moedas cadastradas com sucesso!"
+spinner.success("(Concluído!)")
