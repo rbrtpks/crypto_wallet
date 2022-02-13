@@ -1,11 +1,10 @@
 <h1>Seja Bem-Vindo!</h1>
-<p>
-    Rbrt
-</p>
 
-<%# Código Ruby dentro da tag HTML: %>
-<p> A soma é: <%= 1 + 1 %> </p>
-<p> Seu nome de trás pra frente é: <%= "Rbrt".reverse %> </p>
-<% ax = "minha variável a" %>
-<p>Imprimindo a variavel a: <%= ax %> </p>
-<p>A data de hoje é <%= Date.today %> </p>
+<ul>
+    <li>
+        <a href="/coins">Cadastro de Moedas</a>
+    </li>
+    <li>
+        <%= link_to "Cadastro de Moedas", coins_path %>
+    </li>
+</ul>
