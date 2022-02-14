@@ -5,8 +5,8 @@ namespace :dev do
       show_spinner("Apagando BD...") { %x(rails db:drop) }
       show_spinner("Criando BD...") { %x(rails db:create) }
       show_spinner("Migrando BD...") { %x(rails db:migrate) }
-      %x(rails dev:add_coins) #Executa comandos direto no ruby
       %x(rails dev:add_mining_types)
+      %x(rails dev:add_coins) #Executa comandos direto no ruby
     else
       puts "Você não está em ambiente de desenvolvimento"
     end
@@ -14,33 +14,38 @@ namespace :dev do
 
   desc "Cadastra as moedas"
   task add_coins: :environment do
-    
     show_spinner("Cadastrando moedas...") do
       coins = [
                 {
                   description: "Bitcoin",
                   acronym: "BTC",
-                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
+                  mining_type: MiningType.first #Busca o primeiro
+                  # mining_type: MiningType.find_by(acronym: 'PoW') #Forçar FK pelo nome do campo PoW
                 },
                 {
                   description: "Ethereum",
                   acronym: "ETH",
-                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
+                  mining_type: MiningType.all.sample #Buscar um item aleatório da tabela MiningTypes para ser FK
                 },
                 {
                   description: "Dash",
                   acronym: "DASH",
-                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/131.png"
+                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/131.png",
+                  mining_type: MiningType.all.sample
                 },
                 {
                   description: "Iota",
                   acronym: "IOT",
-                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1720.png"
+                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1720.png",
+                  mining_type: MiningType.all.sample
                 },
                 {
                   description: "ZCash",
                   acronym: "ZEC",
-                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1437.png"
+                  url_image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1437.png",
+                  mining_type: MiningType.all.sample
                 }
               ]
 
