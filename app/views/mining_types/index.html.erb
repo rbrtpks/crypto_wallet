@@ -14,8 +14,8 @@
   <tbody>
     <% @mining_types.each do |mining_type| %>
       <tr>
-        <td><%= mining_type.description %></td>
-        <td><%= mining_type.acronym %></td>
+        <td><%= @mining_types.human_attribute_name(:description) %> </td>
+        <td><%= @mining_types.human_attribute_name(:acronym) %> </td>
         <td><%= link_to t('links.show'), mining_type %></td>
         <td><%= link_to t('links.edit'), edit_mining_type_path(mining_type) %></td>
         <td><%= link_to t('links.delete'), mining_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
